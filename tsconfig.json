@@ -1,0 +1,6 @@
+{
+	"compilerOptions": {
+		"lib": ["ESNext", "DOM"]
+	},
+	"files": ["scripts/content.ts"]
+}
