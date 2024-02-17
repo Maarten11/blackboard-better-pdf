@@ -1,0 +1,7 @@
+{
+	"compilerOptions": {
+		"lib": ["dom", "ESNext"],
+		"types": ["chrome-types"]
+	},
+	"include": ["scripts/*.ts"]
+}
