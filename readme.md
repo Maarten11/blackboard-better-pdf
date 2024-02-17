@@ -10,7 +10,7 @@ A popup will appear with a button that allows you to fetch all pdf links
 
 For developping, typescript is used, because who uses javascript nowadays.
 
-### Before starting run:
+### Before developing run:
 
 ```bash
 $ npm i
