@@ -21,6 +21,11 @@
 // 	(date ?? heading).insertAdjacentElement("afterend", badge);
 // }
 
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+	console.log(message);
+	return true;
+});
+
 function returnIFrameChild(element: HTMLElement): HTMLIFrameElement | null {
 	if (!element.hasChildNodes) return null;
 
@@ -40,10 +45,10 @@ function returnIFrameChild(element: HTMLElement): HTMLIFrameElement | null {
 	return null;
 }
 
-const previews: Array<HTMLElement> = Array.from(
-	// document.querySelectorAll("bb-file-preview")
-	document.querySelectorAll("h1")
-);
+// const previews: NodeListOf<HTMLElement> =
+// 	document.querySelectorAll("bb-file-preview");
+const previews: HTMLCollectionOf<Element> =
+	document.getElementsByTagName("bb-file-preview");
 
 if (!!previews.length) {
 	previews.forEach((p) => {

@@ -17,6 +17,10 @@
 // 	const date = article.querySelector("time")?.parentNode;
 // 	(date ?? heading).insertAdjacentElement("afterend", badge);
 // }
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    console.log(message);
+    return true;
+});
 function returnIFrameChild(element) {
     if (!element.hasChildNodes)
         return null;
@@ -34,9 +38,7 @@ function returnIFrameChild(element) {
     });
     return null;
 }
-var previews = Array.from(
-// document.querySelectorAll("bb-file-preview")
-document.querySelectorAll("h1"));
+var previews = document.querySelectorAll("bb-file-preview");
 if (!!previews.length) {
     previews.forEach(function (p) {
         p.style.color = "red";
