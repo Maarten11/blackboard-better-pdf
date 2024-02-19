@@ -1,21 +1,16 @@
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    console.log("message", request);
-    if (request.action === "get-pdfs") {
-        var links = getIFrameLinks();
-        console.log({ links: links });
-        //@ts-ignore
-        sendResponse({ links: links });
-        document.body.style.backgroundColor = "blue";
-        return true;
-    }
+document.addEventListener("DOMContentLoaded", function () {
+    getIFrameLinks();
 });
 function getIFrameLinks() {
-    var previews = document.querySelectorAll("bb-file-preview iframe");
-    var links = [];
+    var previews = document.querySelectorAll(
+    // "bb-file-preview iframe body"
+    "h1");
+    // const links = [];
     previews.forEach(function (p) {
-        links.push(cleanURLS(p.src));
+        // links.push(cleanURLS(p.src));
+        p.style.backgroundColor = "red";
     });
-    return links;
+    // return links;
 }
 function cleanURLS(url) {
     return url.replace("&isInlineRender=true&xythos-download=true&render=inline", "");

@@ -20,6 +20,14 @@ function linksToModal(links: Array<string>) {
 }
 
 function makeLinkModal() {
+	const POPUPID = "bb-pdf-link-popup";
+	const existingModal = document.getElementById(
+		POPUPID
+	) as HTMLDialogElement | null;
+	if (existingModal != null) {
+		existingModal.showModal();
+		return;
+	}
 	const previews: NodeListOf<HTMLIFrameElement> = document.querySelectorAll(
 		"bb-file-preview iframe"
 	);
@@ -29,6 +37,8 @@ function makeLinkModal() {
 	});
 
 	const modal = document.createElement("dialog");
+
+	modal.id = POPUPID;
 
 	const modalStyles = {
 		borderRadius: "1em",
@@ -43,12 +53,13 @@ function makeLinkModal() {
 		modal.style[s] = modalStyles[s];
 	});
 
-	// modal.style.borderRadius = "1em";
-	// modal.style.padding = "1em";
-	// modal.style.maxWidth = "50vw";
-	// modal.style.maxHeight = "50vh";
-
 	const linksList = document.createElement("ul");
+	const linksListStyles = {
+		paddingRight: "2em",
+	};
+	Object.keys(linksListStyles).forEach((s) => {
+		linksList.style[s] = linksListStyles[s];
+	});
 	modal.appendChild(linksList);
 
 	links.forEach((l) => {
@@ -61,6 +72,27 @@ function makeLinkModal() {
 		li.appendChild(a);
 		linksList.appendChild(li);
 	});
+
+	const closeButton = document.createElement("button");
+	closeButton.innerHTML = `&#215;`;
+	const closeButtonStyles = {
+		borderRadius: "0.5em",
+		position: "absolute",
+		width: "2ch",
+		height: "2ch",
+		top: "0",
+		right: "0",
+		margin: "0.5em",
+		fontSize: "1.5em",
+	};
+	Object.keys(closeButtonStyles).forEach((s) => {
+		closeButton.style[s] = closeButtonStyles[s];
+	});
+	closeButton.addEventListener("click", () => {
+		modal.close();
+	});
+
+	modal.appendChild(closeButton);
 
 	document.body.appendChild(modal);
 

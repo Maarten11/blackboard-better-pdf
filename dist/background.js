@@ -15,12 +15,19 @@ function linksToModal(links) {
     modal.showModal();
 }
 function makeLinkModal() {
+    var POPUPID = "bb-pdf-link-popup";
+    var existingModal = document.getElementById(POPUPID);
+    if (existingModal != null) {
+        existingModal.showModal();
+        return;
+    }
     var previews = document.querySelectorAll("bb-file-preview iframe");
     var links = [];
     previews.forEach(function (p) {
         links.push(cleanURLS(p.src));
     });
     var modal = document.createElement("dialog");
+    modal.id = POPUPID;
     var modalStyles = {
         borderRadius: "1em",
         padding: "1em",
@@ -37,6 +44,12 @@ function makeLinkModal() {
     // modal.style.maxWidth = "50vw";
     // modal.style.maxHeight = "50vh";
     var linksList = document.createElement("ul");
+    var linksListStyles = {
+        paddingRight: "2em"
+    };
+    Object.keys(linksListStyles).forEach(function (s) {
+        linksList.style[s] = linksListStyles[s];
+    });
     modal.appendChild(linksList);
     links.forEach(function (l) {
         var li = document.createElement("li");
@@ -48,6 +61,25 @@ function makeLinkModal() {
         li.appendChild(a);
         linksList.appendChild(li);
     });
+    var closeButton = document.createElement("button");
+    closeButton.innerHTML = "&#215;";
+    var closeButtonStyles = {
+        borderRadius: "0.5em",
+        position: "absolute",
+        width: "2ch",
+        height: "2ch",
+        top: "0",
+        right: "0",
+        margin: "0.5em",
+        fontSize: "1.5em"
+    };
+    Object.keys(closeButtonStyles).forEach(function (s) {
+        closeButton.style[s] = closeButtonStyles[s];
+    });
+    closeButton.addEventListener("click", function () {
+        modal.close();
+    });
+    modal.appendChild(closeButton);
     document.body.appendChild(modal);
     modal.showModal();
 }
