@@ -26,6 +26,10 @@ function makeLinkModal() {
     previews.forEach(function (p) {
         links.push(cleanURLS(p.src));
     });
+    var closedPreviews = document.querySelectorAll("bb-file-viewer .file-preview a");
+    closedPreviews.forEach(function (a) {
+        links.push(a.getAttribute("data-ally-file-preview-url"));
+    });
     var modal = document.createElement("dialog");
     modal.id = POPUPID;
     var modalStyles = {
@@ -39,10 +43,6 @@ function makeLinkModal() {
     Object.keys(modalStyles).forEach(function (s) {
         modal.style[s] = modalStyles[s];
     });
-    // modal.style.borderRadius = "1em";
-    // modal.style.padding = "1em";
-    // modal.style.maxWidth = "50vw";
-    // modal.style.maxHeight = "50vh";
     var linksList = document.createElement("ul");
     var linksListStyles = {
         paddingRight: "2em"

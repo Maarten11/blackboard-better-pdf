@@ -36,6 +36,12 @@ function makeLinkModal() {
 		links.push(cleanURLS(p.src));
 	});
 
+	const closedPreviews: NodeListOf<HTMLAnchorElement> =
+		document.querySelectorAll("bb-file-viewer .file-preview a");
+	closedPreviews.forEach((a) => {
+		links.push(a.getAttribute("data-ally-file-preview-url"));
+	});
+
 	const modal = document.createElement("dialog");
 
 	modal.id = POPUPID;
