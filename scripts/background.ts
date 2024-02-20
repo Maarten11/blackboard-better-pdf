@@ -21,12 +21,13 @@ function linksToModal(links: Array<string>) {
 
 function makeLinkModal() {
 	const POPUPID = "bb-pdf-link-popup";
+
+	// If the popup was made, make a new one (this is necessary when switch courses/pages)
 	const existingModal = document.getElementById(
 		POPUPID
 	) as HTMLDialogElement | null;
 	if (existingModal != null) {
-		existingModal.showModal();
-		return;
+		existingModal.remove();
 	}
 	const previews: NodeListOf<HTMLIFrameElement> = document.querySelectorAll(
 		"bb-file-preview iframe"
@@ -41,6 +42,11 @@ function makeLinkModal() {
 	closedPreviews.forEach((a) => {
 		links.push(a.getAttribute("data-ally-file-preview-url"));
 	});
+
+	// Fast exit when no links
+	if (!links.length) {
+		return;
+	}
 
 	const modal = document.createElement("dialog");
 

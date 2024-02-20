@@ -16,10 +16,10 @@ function linksToModal(links) {
 }
 function makeLinkModal() {
     var POPUPID = "bb-pdf-link-popup";
+    // If the popup was made, make a new one (this is necessary when switch courses/pages)
     var existingModal = document.getElementById(POPUPID);
     if (existingModal != null) {
-        existingModal.showModal();
-        return;
+        existingModal.remove();
     }
     var previews = document.querySelectorAll("bb-file-preview iframe");
     var links = [];
@@ -30,6 +30,10 @@ function makeLinkModal() {
     closedPreviews.forEach(function (a) {
         links.push(a.getAttribute("data-ally-file-preview-url"));
     });
+    // Fast exit when no links
+    if (!links.length) {
+        return;
+    }
     var modal = document.createElement("dialog");
     modal.id = POPUPID;
     var modalStyles = {
