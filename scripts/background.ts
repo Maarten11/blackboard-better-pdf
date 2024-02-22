@@ -32,21 +32,40 @@ function makeLinkModal() {
 	const previews: NodeListOf<HTMLIFrameElement> = document.querySelectorAll(
 		"bb-file-preview iframe"
 	);
-	const links = [];
+	const links: Record<string, string> = {};
 	previews.forEach((p) => {
-		links.push(cleanURLS(p.src));
+		const cleaned = cleanURLS(p.src);
+		links[cleaned] = cleaned;
 	});
 
-	const closedPreviews: NodeListOf<HTMLAnchorElement> =
-		document.querySelectorAll("bb-file-viewer .file-preview a");
-	closedPreviews.forEach((a) => {
-		links.push(a.getAttribute("data-ally-file-preview-url"));
+	const closed: NodeListOf<HTMLDivElement> = document.querySelectorAll(
+		"bb-file-viewer .file-container"
+	);
+	closed.forEach((c) => {
+		// console.log(c);
+		const title = (c.querySelector("button.file-name") as HTMLButtonElement)
+			.innerText;
+		const file = (
+			c.querySelector(".file-preview a") as HTMLAnchorElement
+		).getAttribute("data-ally-file-preview-url");
+		// console.log(title, file);
+		links[title] = file;
 	});
+	// const closedPreviews: NodeListOf<HTMLAnchorElement> =
+	// 	document.querySelectorAll("bb-file-viewer .file-preview a");
+	// const titles = document.querySelectorAll("bb-file-viewer .file-name");
+	// closedPreviews.forEach((a) => {
+	// 	a.que
+	// 	links[]
+	// });
 
 	// Fast exit when no links
-	if (!links.length) {
+	if (!Object.keys(links).length) {
 		return;
 	}
+	// if (!links.length) {
+	// 	return;
+	// }
 
 	const modal = document.createElement("dialog");
 
@@ -74,16 +93,16 @@ function makeLinkModal() {
 	});
 	modal.appendChild(linksList);
 
-	links.forEach((l) => {
+	for (const title in links) {
 		const li = document.createElement("li");
 		const a = document.createElement("a");
-		a.href = l;
+		a.href = links[title];
 		a.target = "_blank";
-		a.innerText = l;
+		a.innerText = title;
 		a.style.marginInline = "0.5em";
 		li.appendChild(a);
 		linksList.appendChild(li);
-	});
+	}
 
 	const closeButton = document.createElement("button");
 	closeButton.innerHTML = `&#215;`;

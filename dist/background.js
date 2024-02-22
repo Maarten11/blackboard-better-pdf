@@ -22,18 +22,34 @@ function makeLinkModal() {
         existingModal.remove();
     }
     var previews = document.querySelectorAll("bb-file-preview iframe");
-    var links = [];
+    var links = {};
     previews.forEach(function (p) {
-        links.push(cleanURLS(p.src));
+        var cleaned = cleanURLS(p.src);
+        links[cleaned] = cleaned;
     });
-    var closedPreviews = document.querySelectorAll("bb-file-viewer .file-preview a");
-    closedPreviews.forEach(function (a) {
-        links.push(a.getAttribute("data-ally-file-preview-url"));
+    var closed = document.querySelectorAll("bb-file-viewer .file-container");
+    closed.forEach(function (c) {
+        // console.log(c);
+        var title = c.querySelector("button.file-name")
+            .innerText;
+        var file = c.querySelector(".file-preview a").getAttribute("data-ally-file-preview-url");
+        // console.log(title, file);
+        links[title] = file;
     });
+    // const closedPreviews: NodeListOf<HTMLAnchorElement> =
+    // 	document.querySelectorAll("bb-file-viewer .file-preview a");
+    // const titles = document.querySelectorAll("bb-file-viewer .file-name");
+    // closedPreviews.forEach((a) => {
+    // 	a.que
+    // 	links[]
+    // });
     // Fast exit when no links
-    if (!links.length) {
+    if (!Object.keys(links).length) {
         return;
     }
+    // if (!links.length) {
+    // 	return;
+    // }
     var modal = document.createElement("dialog");
     modal.id = POPUPID;
     var modalStyles = {
@@ -55,16 +71,16 @@ function makeLinkModal() {
         linksList.style[s] = linksListStyles[s];
     });
     modal.appendChild(linksList);
-    links.forEach(function (l) {
+    for (var title in links) {
         var li = document.createElement("li");
         var a = document.createElement("a");
-        a.href = l;
+        a.href = links[title];
         a.target = "_blank";
-        a.innerText = l;
+        a.innerText = title;
         a.style.marginInline = "0.5em";
         li.appendChild(a);
         linksList.appendChild(li);
-    });
+    }
     var closeButton = document.createElement("button");
     closeButton.innerHTML = "&#215;";
     var closeButtonStyles = {
