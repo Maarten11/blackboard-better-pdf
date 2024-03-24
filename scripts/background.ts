@@ -39,7 +39,7 @@ function makeLinkModal() {
 	});
 
 	const closed: NodeListOf<HTMLDivElement> = document.querySelectorAll(
-		"bb-file-viewer .file-container"
+		"bb-file-viewer .file-container:not(:has(video))"
 	);
 	closed.forEach((c) => {
 		// console.log(c);
@@ -49,6 +49,14 @@ function makeLinkModal() {
 			c.querySelector(".file-preview a") as HTMLAnchorElement
 		).getAttribute("data-ally-file-preview-url");
 		// console.log(title, file);
+		links[title] = file;
+	});
+	const videos: NodeListOf<HTMLDivElement> = document.querySelectorAll(
+		"bb-file-viewer .file-container video"
+	);
+	videos.forEach((v, i) => {
+		const title = `Video ${i + 1}`;
+		const file = v.getAttribute("src");
 		links[title] = file;
 	});
 	// const closedPreviews: NodeListOf<HTMLAnchorElement> =

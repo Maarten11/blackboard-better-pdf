@@ -27,13 +27,19 @@ function makeLinkModal() {
         var cleaned = cleanURLS(p.src);
         links[cleaned] = cleaned;
     });
-    var closed = document.querySelectorAll("bb-file-viewer .file-container");
+    var closed = document.querySelectorAll("bb-file-viewer .file-container:not(:has(video))");
     closed.forEach(function (c) {
         // console.log(c);
         var title = c.querySelector("button.file-name")
             .innerText;
         var file = c.querySelector(".file-preview a").getAttribute("data-ally-file-preview-url");
         // console.log(title, file);
+        links[title] = file;
+    });
+    var videos = document.querySelectorAll("bb-file-viewer .file-container video");
+    videos.forEach(function (v, i) {
+        var title = "Video ".concat(i);
+        var file = v.getAttribute("src");
         links[title] = file;
     });
     // const closedPreviews: NodeListOf<HTMLAnchorElement> =
