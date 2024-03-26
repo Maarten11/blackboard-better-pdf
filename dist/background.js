@@ -30,7 +30,7 @@ function makeLinkModal() {
     var closed = document.querySelectorAll("bb-file-viewer .file-container:not(:has(video))");
     closed.forEach(function (c) {
         // console.log(c);
-        var title = c.querySelector("button.file-name")
+        var title = c.querySelector(".file-name")
             .innerText;
         var file = c.querySelector(".file-preview a").getAttribute("data-ally-file-preview-url");
         // console.log(title, file);
@@ -38,7 +38,7 @@ function makeLinkModal() {
     });
     var videos = document.querySelectorAll("bb-file-viewer .file-container video");
     videos.forEach(function (v, i) {
-        var title = "Video ".concat(i);
+        var title = "Video ".concat(i + 1);
         var file = v.getAttribute("src");
         links[title] = file;
     });

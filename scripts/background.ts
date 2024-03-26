@@ -43,7 +43,7 @@ function makeLinkModal() {
 	);
 	closed.forEach((c) => {
 		// console.log(c);
-		const title = (c.querySelector("button.file-name") as HTMLButtonElement)
+		const title = (c.querySelector(".file-name") as HTMLButtonElement)
 			.innerText;
 		const file = (
 			c.querySelector(".file-preview a") as HTMLAnchorElement
