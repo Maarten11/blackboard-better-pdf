@@ -15,10 +15,3 @@ function getIFrameLinks() {
 
 	// return links;
 }
-
-function cleanURLS(url) {
-	return url.replace(
-		"&isInlineRender=true&xythos-download=true&render=inline",
-		""
-	);
-}

@@ -20,6 +20,12 @@ function linksToModal(links: Array<string>) {
 }
 
 function makeLinkModal() {
+	const cleanURLS = (url: string) => {
+		return url.replace(
+			"&isInlineRender=true&xythos-download=true&render=inline",
+			""
+		);
+	};
 	const POPUPID = "bb-pdf-link-popup";
 
 	// If the popup was made, make a new one (this is necessary when switch courses/pages)
