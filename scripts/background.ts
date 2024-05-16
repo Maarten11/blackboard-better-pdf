@@ -72,6 +72,17 @@ function makeLinkModal() {
 	// 	a.que
 	// 	links[]
 	// });
+	const otherFiles: NodeListOf<HTMLDivElement> = document.querySelectorAll(
+		"bb-rich-text-editor div[data-bbtype='attachment']"
+	);
+	console.log(otherFiles);
+	otherFiles.forEach((v) => {
+		const title: string = v.querySelector(
+			".bb-editor-file-viewer div[title$='File'] span"
+		).textContent;
+		const file = v.getAttribute("href");
+		links[title] = file;
+	});
 
 	// Fast exit when no links
 	if (!Object.keys(links).length) {
