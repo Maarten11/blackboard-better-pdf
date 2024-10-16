@@ -1,5 +1,11 @@
 # Blackboard Better PDF
 
+## Installation
+
+Extract the zip in a folder on your computer.
+
+Go to your extensions and `load unpacked` (you might need to enable developer mode for this to work).
+
 ## Using the extension
 
 ### Keyboard
