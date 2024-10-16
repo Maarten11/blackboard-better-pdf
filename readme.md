@@ -2,13 +2,23 @@
 
 ## Using the extension
 
-To use the extension, click the extension in the extensions menu.
+### Keyboard
+
+When looking at a Blackboard PDF view, press Ctrl+B (Command + B on Mac)
+
+### Manually
+
+When looking at a Blackboard PDF view, click the extension in the extensions menu.
 
 A popup will appear with a button that allows you to fetch all pdf links
 
-## Developping
+## Issues
 
-For developping, typescript is used, because who uses javascript nowadays.
+Feel free to point out any issues with this extension here on GitHub
+
+## Developing
+
+For developing, typescript is used, because who uses javascript nowadays.
 
 ### Before developing run:
 
