@@ -48,13 +48,11 @@ function makeLinkModal() {
 		"bb-file-viewer .file-container:not(:has(video))"
 	);
 	closed.forEach((c) => {
-		// console.log(c);
 		const title = (c.querySelector(".file-name") as HTMLButtonElement)
 			.innerText;
 		const file = (
 			c.querySelector(".file-preview a") as HTMLAnchorElement
 		).getAttribute("data-ally-file-preview-url");
-		// console.log(title, file);
 		links[title] = file;
 	});
 	const videos: NodeListOf<HTMLDivElement> = document.querySelectorAll(
@@ -65,13 +63,6 @@ function makeLinkModal() {
 		const file = v.getAttribute("src");
 		links[title] = file;
 	});
-	// const closedPreviews: NodeListOf<HTMLAnchorElement> =
-	// 	document.querySelectorAll("bb-file-viewer .file-preview a");
-	// const titles = document.querySelectorAll("bb-file-viewer .file-name");
-	// closedPreviews.forEach((a) => {
-	// 	a.que
-	// 	links[]
-	// });
 	const otherFiles: NodeListOf<HTMLDivElement> = document.querySelectorAll(
 		"bb-rich-text-editor div[data-bbtype='attachment']"
 	);
@@ -88,9 +79,6 @@ function makeLinkModal() {
 	if (!Object.keys(links).length) {
 		return;
 	}
-	// if (!links.length) {
-	// 	return;
-	// }
 
 	const modal = document.createElement("dialog");
 
