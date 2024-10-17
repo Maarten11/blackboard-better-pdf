@@ -1,10 +1,13 @@
 # Blackboard Better PDF
 
+A browser extension that allows you to open BlackBoard PDF's in an external tab.
+
 ## Installation
 
-Extract the zip in a folder on your computer.
+Extract the zip into a folder on your computer.
 
-Go to your extensions and `load unpacked` (you might need to enable developer mode for this to work).
+Go to your browser's extensions and select `load unpacked` (you might need to enable developer mode for this to work).
+Select the folder you just created (it should have the `manifest.json` file inside it).
 
 ## Using the extension
 
