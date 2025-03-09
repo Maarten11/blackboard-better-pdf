@@ -57,12 +57,12 @@ function makeLinkModal() {
 	});
 
 	// For documents with text on (such as the self study on SoftwareTesting)
-	const other = document.querySelectorAll(
-		".bbml-editor-parent section:has(a) a"
-	);
+	const other = document.querySelectorAll(".bbml-editor-parent section:has(a)");
 	other.forEach((o) => {
 		const title = o.querySelector("span").innerText;
-		const file = o.getAttribute("data-ally-file-preview-url");
+		const file = o
+			.querySelector("a")
+			.getAttribute("data-ally-file-preview-url");
 		links[title] = file;
 	});
 
